@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<!--Main Site-->
+<link href="https://drive.google.com/uc?export=download&id=0B-GkD7m3lO4aUHg5MTA3RW1CeXc" rel="stylesheet">
+<script src="https://drive.google.com/uc?export=download&id=0B-GkD7m3lO4aTTdoZHRYSTFWcHc"></script>
+
+<div class="left">
+<ol id="coords"></ol>
+<ol id="coords2"></ol>
+<button onClick="loadVideo()">Set Video</button>
+<button onClick="startTime()">Set Time</button>
+<button onClick="clearData()">Clear Data</button>
+<button onClick="setScale()">Set Scale</button>
+<button onClick="setOrigin()">Set Origin</button>
+<button onClick="nextFrame()">Next Frame</button>
+<button onClick="previousFrame()">Previous Frame</button>
+<button onClick="setTime()">Set Frame Rate</button>
+<button onClick="removeMark()">Remove Point</button>
+<button onClick="undo()">Undo Last Point</button>
+<button onClick="restartVideo()">Restart Video</button>
+<button onClick="instructions()">Show/Hide Instructions</button>
+<!--<button onClick="copyText()">Copy Table</button>-->
+
+<div id="instructions">
+  <p>
+  Instructions:
+  <br>
+  <br>Point color legend:
+  <br>Data: red
+  <br>Scale: green
+  <br>Origin: yellow
+  <br>
+  <br>To change playing video:
+  <br>1. Click "Set Video"
+  <br>2. Type entire URL of video into the box
+  <br>
+  <br>To change the current time of the video:
+  <br>1. Click "Set Time".
+  <br>2. Enter desired time in the box.
+  <br>
+  <br>To set the scale of the video:
+  <br>1. Mark two points on the video.
+  <br>2. Click "Set Scale".
+  <br>3. Those two points will be cleared and the scale will be set.
+  <br>
+  <br>To set origin:
+  <br>1. Mark a point on the video.
+  <br>2. Click "Set Origin".
+  <br>3. The most recent point will be cleared and origin set.
+  <br>
+  <br>To remove a specific point:
+  <br>1. Click "Remove point".
+  <br>2. Enter the number of the data point you want to remove.
+  </p>
+</div>
+
+<div class="clusterize">
+  <table id="sheet">
+    <thead>
+      <tr><td></td><td>X</td><td>Y</td><td>Time</td><td>X Velocity</td><td>Y Velocity</td></tr>
+    </thead>
+    <tbody id="content">
+    </tbody>
+  </table>
+</div>
+</div>
+
+<div id="clickBox" class="right"><div id="marks" class="mark"></div><div id="mainMarks" class="mark"></div></div>
+<div id="player"></div>
+
+<script>
+
+// 2. This code loads the IFrame Player API code asynchronously.
+  var tag = document.createElement('script');
+
+  tag.src = "https://www.youtube.com/iframe_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+  // 3. This function creates an <iframe> (and YouTube player)
+  //    after the API code downloads.
+  var player;
+
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {
+      height: '600',
+      width: '985',
+      videoId: 'F-p5_2I2QOw',
+      events: {
+        'onReady': onPlayerReady,
+        'onStateChange': onPlayerStateChange
+      },
+      playerVars: {
+        'autoplay': 1,
+        'controls': 0,
+        'showinfo': 0,
+        'rel': 0,
+        'disablekb': 1,
+        'modestbranding': 1,
+      }
+    });
+  }
+
+  // 4. The API will call this function when the video player is ready.
+  function onPlayerReady(event) {
+    event.target.playVideo();
+  }
+
+  // 5. The API calls this function when the player's state changes.
+  //    The function indicates that when playing a video (state=1),
+  //    the player should play for six seconds and then stop.
+  var done = false;
+
+  function onPlayerStateChange(event) {
+    if (event.data == YT.PlayerState.PLAYING) {
+      setTimeout(stopVideo, 100);
+      done = true;
+    }
+  }
+
+  function stopVideo() {
+    player.pauseVideo();
+  }
+</script>

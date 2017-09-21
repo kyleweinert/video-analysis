@@ -1,0 +1,69 @@
+.left{
+	float:left;
+	width:25%;
+}
+
+.right{
+	float:right;
+	width:70%;
+}
+
+.coord {
+  opacity: 0.7;
+  width: 100px;
+  border: 1px solid black;
+}
+
+#coords {
+  opacity: 0.7;
+  width: 100px;
+  display:none;
+}
+
+#coords2 {
+  opacity: 0.7;
+  width: 100px;
+  display:none;
+}
+
+#buttonSheet {
+  float: left;
+}
+
+#sheet {
+  visibility: visible;
+  border: solid 1px black;
+}
+
+#player {
+  float: right;
+  position: absolute;
+  z-index: 2;
+  margin-left:0.4%;
+}
+
+#clickBox{
+  height:600px;
+  width:985px;
+  z-index:10;
+  position:absolute;
+  margin-left:25%;
+  border: solid 1px black;
+}
+
+.mark{
+  z-index: 100;
+}
+
+table thead tr td{
+  border: solid 1px black;
+  text-align:center;
+}
+
+table tr td{
+  border: solid 1px black;
+}
+
+#instructions{
+  display: none;
+}
